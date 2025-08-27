@@ -1,0 +1,84 @@
+{{!< default}}
+
+{{!-- Author profile --}}
+{{#primary_author}}
+  <div class="bg-acc">
+    <div class="container wrapper">
+      <div class="author-profile">
+        <div class="author-profile__header">
+          <h1 class="author-profile__name">{{name}}</h1>
+          <ul class="author-profile__social {{#if twitter}} has-twitter{{/if}}{{#if facebook}} has-facebook{{/if}}{{#if website}} has-website{{/if}}">
+            {{!-- Twitter --}}
+            {{#if twitter}}
+              <li>
+                <a href="{{twitter_url}}" class="twitter"
+                  title="Twitter" aria-label="Twitter"
+                  target="_blank" rel="noopener noreferrer">
+                  {{> icon name="twitter-x" size="sm"}}
+                </a>
+              </li>
+            {{/if}}
+            {{!-- Facebook --}}
+            {{#if facebook}}
+              <li>
+                <a href="{{facebook_url}}" class="facebook"
+                  title="Facebook" aria-label="Facebook"
+                  target="_blank" rel="noopener noreferrer">
+                  {{> icon name="facebook" icon_class="filled" size="sm"}}
+                </a>
+              </li>
+            {{/if}}
+            {{!-- Author website --}}
+            {{#if website}}
+              <li>
+                <a href="{{website}}" class="link"
+                  title="Website" aria-label="Website"
+                  target="_blank" rel="noopener noreferrer">
+                  {{> icon name="link" size="sm"}}
+                </a>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+        <div class="author-profile__content">
+          {{!-- Author profile image --}}
+          {{#if profile_image}}
+            <figure class="author-profile__media">
+              {{> image
+                image_type="author"
+                image_class="lazyload author-profile__img"
+                image_url=profile_image
+                size_xs=true
+                size_s=true
+                sizes="100px"
+              }}
+            </figure>
+          {{/if}}
+
+          {{!-- bio --}}
+          {{#if bio}}<p class="author-profile__bio">{{bio}}</p>{{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{/primary_author}}
+
+{{!-- Articles --}}
+{{#if posts}}
+  <div class="container wrapper">
+    <span class="section-title xs">
+      {{plural pagination.total empty=(t 'No articles') singular=(t '1 article') plural=(t '% articles')}}
+      {{#is "paged"}}({{t "Page"}} {{pagination.page}}){{/is}}
+    </span>
+    
+    {{!-- Articles --}}
+    <div class="flex flex-col gap-150 mb-lg max-w-60">
+      {{#foreach posts}}
+        {{> post-card card_class="horizontal" heading="h2"}}
+      {{/foreach}}
+    </div>
+
+    {{!-- Pagination --}}
+    {{> pagination}}
+  </div>
+{{/if}}

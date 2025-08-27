@@ -1,0 +1,35 @@
+<div class="container wrapper home-hero" data-layout="3-featured+latest" data-lines="true">
+  {{#get "posts" filter="featured:true" include="authors,tags" limit="3"}}
+    {{!-- Main post --}}
+    {{#foreach posts to="1"}}
+      {{> post-card card_class="main-post" heading="h1"}}
+    {{/foreach}}
+
+    {{!-- Two more posts - left --}}
+    <div class="home-hero-cards">
+      {{#foreach posts from="2" to="3"}}
+        {{> post-card}}
+      {{/foreach}}
+    </div>
+  {{/get}}
+
+  {{!-- Get the latest and editor's picks--}}
+  <div class="home-hero-list-wrapper">
+    <div class="home-hero-list-tabs" data-tab="latest">
+      <h2>
+        <a href="/tag/nl/" class="latest js-tab">
+          <span>{{t "Morning briefing"}}</span>
+          {{> icon name="arrow-right"}}
+        </a>
+      </h2>
+    </div>
+    {{#get "posts" filter="featured:false+tag:nl" include="authors,tags" limit="5"}}
+      <div class="home-hero-list latest">
+        {{#foreach posts}}
+          {{> post-card-simple}}
+        {{/foreach}}
+      </div>
+    {{/get}}
+  </div>
+  
+</div>

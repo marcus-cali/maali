@@ -1,0 +1,48 @@
+{{!< default}}
+
+{{!-- Author profile --}}
+{{#tag}}
+  <div class="bg-acc">
+    <div class="container wrapper">
+      <div class="tag-hero">
+        <div class="tag-hero__content">
+          <h1 class="tag-hero__name">{{name}}</h1>
+          {{#if description}}<p class="tag-hero__description">{{description}}</p>{{/if}}
+        </div>
+        {{#if feature_image}}
+          <figure class="tag-hero__media">
+            {{> image
+              image_type="tag"
+              image_class="lazyload tag-hero__img"
+              image_url=feature_image
+              size_xs=true
+              size_s=true
+              size_m=true
+              sizes="(max-width: 400px) 280px, 580px"
+            }}
+          </figure>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+{{/tag}}
+
+{{!-- Articles --}}
+{{#if posts}}
+  <div class="container wrapper">
+    <span class="section-title xs" {{#tag}}{{#if accent_color}}style="--color-accent: {{accent_color}}"{{/if}}{{/tag}}>
+      {{plural pagination.total empty=(t 'No articles') singular=(t '1 article') plural=(t '% articles')}}
+      {{#is "paged"}}({{t "Page"}} {{pagination.page}}){{/is}}
+    </span>
+
+    {{!-- Articles --}}
+    <div class="flex flex-col gap-150 mb-lg max-w-60">
+      {{#foreach posts}}
+        {{> post-card card_class="horizontal" heading="h2"}}
+      {{/foreach}}
+    </div>
+
+    {{!-- Pagination --}}
+    {{> pagination}}
+  </div>
+{{/if}}

@@ -1,0 +1,51 @@
+/* Sidebar */
+.sidebar {
+  height: 100%;
+
+  &__section {
+    margin-bottom: var(--gap-lg);
+
+    &.is-sticky { 
+      top: 2em;
+    }
+  }
+
+  .post-card-simple {
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 0.75em;
+    padding-bottom: 0.75em;
+
+    &__title { font-size: 0.95rem; }
+    .post-card-tags { margin-bottom: 0.25rem; margin-top: 0; }
+    .post-info { 
+      margin-top: 0.25rem;
+      
+      /* Hide author info completely in sidebar Morning Briefing */
+      .post-info__authors,
+      .post-info__avatars,
+      .author-avatar,
+      ul.post-info__avatars,
+      span.post-info__authors {
+        display: none !important;
+        visibility: hidden !important;
+      }
+    }
+  }
+
+  &__subscribe {
+    padding: 1em 1.25em 1.25em 1.25em;
+    border-radius: var(--global-radius);
+    width: 100%;
+    border: 3px solid var(--color-border);
+
+    &-title { font-size: 1.2rem; }
+    &-description { 
+      font-size: 0.95rem; 
+      line-height: 1.5;
+    }
+  }
+}
+
+.header[data-style="sticky"] ~ .main .sidebar__section.is-sticky { 
+  top: 5em;
+}

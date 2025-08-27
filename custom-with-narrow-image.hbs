@@ -1,0 +1,37 @@
+{{!< default}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+  <div class="container wrapper">
+    {{!-- Post hero --}}
+    {{> post-hero hero_class=""}}
+
+    {{!-- Date and share --}}
+    {{#is "post"}}
+      {{> post-date-share}}
+    {{/is}}
+
+    {{!-- Post content --}}
+    <article class="{{post_class}} content post-access-{{visibility}}">
+      {{content}}
+    </article>
+
+    {{#is "post"}}
+      {{!-- Tags --}}
+      {{> post-tags}}
+
+      {{!-- Authors --}}
+      {{> post-authors}}
+    {{/is}}
+  </div>
+
+  {{!-- Comments --}}
+  {{#is "post"}}
+    {{> comments}}
+  {{/is}}
+{{/post}}
+
+{{!-- Read next --}}
+{{#is "post"}}
+  {{> related}}
+{{/is}}

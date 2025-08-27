@@ -1,0 +1,128 @@
+{{!< default}}
+
+{{!-- Author profile --}}
+{{#author}}
+  <div class="bg-acc">
+    <div class="container wrapper">
+      <div class="author-profile">
+        <div class="author-profile__header flex-wrap gap-sm">
+          <h1 class="author-profile__name">{{name}}</h1>
+          <ul class="author-profile__social {{#if twitter}} has-twitter{{/if}}{{#if facebook}} has-facebook{{/if}}{{#if website}} has-website{{/if}}">
+            {{!-- Twitter --}}
+            {{#if twitter}}
+              <li>
+                <a href="{{social_url type="twitter"}}" target="_blank" title="Twitter" aria-label="Twitter">
+                  {{> icon name="twitter-x" size="sm"}}
+                </a>
+              </li>
+            {{/if}}
+            {{!-- Facebook --}}
+            {{#if facebook}}
+              <li>
+                <a href="{{social_url type="facebook"}}" target="_blank" title="Facebook" aria-label="Facebook">
+                {{> icon name="facebook" icon_class="filled" size="sm"}}
+              </a>
+            {{/if}}
+            {{#if linkedin}}
+              <li>
+                <a href="{{social_url type="linkedin"}}" target="_blank" title="LinkedIn" aria-label="LinkedIn">
+                  {{> icon name="linkedin" size="sm"}}
+                </a>
+              </li>
+            {{/if}}
+            {{#if bluesky}}
+              <li>
+                <a href="{{social_url type="bluesky"}}" target="_blank" title="Bluesky" aria-label="Bluesky">
+                  {{> icon name="bluesky" size="sm"}}
+                </a>
+              </li>
+            {{/if}}
+            {{#if threads}} 
+              <li>
+                <a href="{{social_url type="threads"}}" target="_blank" title="Threads" aria-label="Threads">
+                  {{> icon name="threads" size="sm"}}
+                </a>
+              </li>
+            {{/if}}
+            {{#if mastodon}}    
+              <li>
+                <a href="{{social_url type="mastodon"}}" target="_blank" title="Mastodon" aria-label="Mastodon">
+                  {{> icon name="mastodon" size="sm"}}
+                </a>
+              </li>
+            {{/if}}
+            {{#if tiktok}}
+              <li>
+                <a href="{{social_url type="tiktok"}}" target="_blank" title="TikTok" aria-label="TikTok">
+                  {{> icon name="tiktok" size="sm"}}
+                </a>
+              </li>
+            {{/if}}
+            {{#if youtube}}
+              <li>
+                <a href="{{social_url type="youtube"}}" target="_blank" title="YouTube" aria-label="YouTube">
+                  {{> icon name="youtube" size="sm"}}
+                </a>
+              </li>
+            {{/if}}
+            {{#if instagram}}
+              <li>
+                <a href="{{social_url type="instagram"}}" target="_blank" title="Instagram" aria-label="Instagram">
+                  {{> icon name="instagram" size="sm"}}
+                </a>
+              </li>
+            {{/if}}
+            {{!-- Author website --}}
+            {{#if website}}
+              <li>
+                <a href="{{website}}" class="link"
+                  title="Website" aria-label="Website"
+                  target="_blank" rel="noopener noreferrer">
+                  {{> icon name="link" size="sm"}}
+                </a>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+        <div class="author-profile__content">
+          {{!-- Author profile image --}}
+          {{#if profile_image}}
+            <figure class="author-profile__media">
+              {{> image
+                image_type="author"
+                image_class="lazyload author-profile__img"
+                image_url=profile_image
+                size_xs=true
+                size_s=true
+                sizes="100px"
+              }}
+            </figure>
+          {{/if}}
+
+          {{!-- bio --}}
+          {{#if bio}}<p class="author-profile__bio">{{bio}}</p>{{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{/author}}
+
+{{!-- Articles --}}
+{{#if posts}}
+  <div class="container wrapper">
+    <span class="section-title xs">
+      {{plural pagination.total empty=(t 'No articles') singular=(t '1 article') plural=(t '% articles')}}
+      {{#is "paged"}}({{t "Page"}} {{pagination.page}}){{/is}}
+    </span>
+    
+    {{!-- Articles --}}
+    <div class="flex flex-col gap-150 mb-lg max-w-60">
+      {{#foreach posts}}
+        {{> post-card card_class="horizontal" heading="h2"}}
+      {{/foreach}}
+    </div>
+
+    {{!-- Pagination --}}
+    {{> pagination}}
+  </div>
+{{/if}}

@@ -1,0 +1,16 @@
+{{!< default}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#page}}
+
+  <div class="container wrapper">
+    {{!-- Hero --}}
+    {{> post-hero hero_class="wide"}}
+
+    {{!-- Article --}}
+    <article class="{{page_class}} content post-access-{{visibility}}">
+      {{content}}
+    </article>
+  </div>
+
+{{/page}}

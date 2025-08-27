@@ -1,0 +1,7 @@
+.dark-theme-logo { display: none; }
+
+@mixin darktheme {
+  .dark-theme-logo { display: block; }
+  .dark-theme-logo + picture, 
+  .dark-theme-logo + span { display: none; }
+}

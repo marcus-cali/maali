@@ -1,0 +1,48 @@
+{{#match @page.show_title_and_feature_image}}
+  <div class="post-hero{{#is "post"}} is-post{{/is}}{{#is "page"}} is-page{{/is}}{{#if featured}} is-featured{{/if}} {{hero_class}}" 
+    data-feature-image="{{#if feature_image}}true{{else}}false{{/if}}">
+    
+    <div class="post-hero__content flex flex-col">
+      {{!-- Tag --}}
+      {{#foreach tags limit="1"}}
+        <a class="post-tag mr-sm tag-{{slug}}" href="{{url}}" aria-label="{{name}}"
+          {{#if accent_color}} style="--color-accent: {{accent_color}}"{{/if}}
+        >{{name}}</a>
+      {{/foreach}}
+
+      {{!-- Title --}}
+      <h1 class="post-hero__title{{#is "page"}} mb-0{{/is}}">{{title}}</h1>
+    
+      {{!-- Custom excerpt --}}
+      {{#if custom_excerpt}}
+        <p class="post-hero__excerpt text-acc{{#is "page"}} mt-xs{{/is}}"><strong>{{custom_excerpt}}</strong></p>
+      {{/if}}
+
+      {{!-- Authors & date --}}
+      {{#is "post"}}
+        {{> post-author-date}}
+      {{/is}}
+    </div>
+
+    {{!-- Image --}}
+    {{#if feature_image}}
+      <div class="post-hero__media">
+        <figure class="post-hero__figure">
+          {{> image
+            image_type="post"
+            image_class="lazyload post-hero__img"
+            image_url=feature_image
+            size_s=true
+            size_m=true
+            size_l=true
+            size_xl=true
+            sizes="(max-width: 400px) 280px, 580px"
+          }}
+          {{!-- Figcaption --}}
+          {{#if feature_image_caption}}<figcaption>{{feature_image_caption}}</figcaption>{{/if}}
+        </figure>
+      </div>
+    {{/if}}
+
+  </div>
+{{/match}}

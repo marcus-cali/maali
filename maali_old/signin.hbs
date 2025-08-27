@@ -1,0 +1,65 @@
+{{!< default}}
+
+<div class="signin-page flex flex-cc" data-image-style="right">
+  {{#if @member}}
+    {{!-- Logged in: Redirect to home --}}
+    <script>window.location = '{{@site.url}}';</script>
+  {{else}}
+    <div class="signin-page__content">
+      <a href="{{@site.url}}" class="signin-page__brand">
+        {{#if @custom.dark_theme_logo}}
+          {{> dark-theme-logo
+            image_class="lazyload"
+          }}
+        {{/if}}
+        {{#if @site.logo}}
+          {{> image
+            image_type="site"
+            image_class="lazyload"
+            image_url=@site.logo
+            size_s=true
+            sizes="200px"
+          }}
+        {{else}}
+          {{@site.title}}
+        {{/if}}
+      </a>
+
+      <div class="signin-page__box">
+        <h1 class="signin-page__title">{{#page}}{{title}}{{else}}{{t "Sign in"}}{{/page}}</h1>
+        <p id="form-input-label" class="opacity-080">{{#page}}{{excerpt}}{{else}}{{t "Sign into your account again."}}{{/page}}</p>
+        {{> subscribe-form 
+          form_type="signin" 
+          form_class=""
+          button_class="uppercase btn--brand"
+          button_text=(t 'Send login link') 
+        }}
+        <p class="m-0 mt text-center">
+          <small>{{t "Don't have an account yet?"}}
+            {{#link href="/signup/"}}{{t "Sign up"}}{{/link}}
+          </small>
+        </p>
+      </div>
+    </div>
+    {{#page}}
+      {{#if feature_image}}
+        <figure class="signin-page__media{{#if feature_image_caption}} has-caption{{/if}}">
+          {{> image
+            picture_class="h-100 w-100"
+            image_type="post"
+            image_class="lazyload"
+            image_url=feature_image
+            size_s=true
+            size_m=true
+            size_l=true
+            size_xl=true
+            sizes="0px"
+          }}
+          {{#if feature_image_caption}}
+            <figcaption>{{feature_image_caption}}</figcaption>
+          {{/if}}
+        </figure>
+      {{/if}}
+    {{/page}}
+  {{/if}}
+</div>

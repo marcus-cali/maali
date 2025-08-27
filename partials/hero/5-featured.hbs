@@ -1,0 +1,22 @@
+{{#get "posts" filter="featured:true" include="authors,tags" limit="5"}}
+  <div class="container wrapper home-hero" data-layout="5-featured" data-lines="true">
+    {{!-- Main post --}}
+    {{#foreach posts to="1"}}
+      {{> post-card card_class="main-post" heading="h1"}}
+    {{/foreach}}
+
+    {{!-- The other posts - left --}}
+    <div class="home-hero-cards">
+      {{#foreach posts from="2" to="3"}}
+        {{> post-card}}
+      {{/foreach}}
+    </div>
+
+    {{!-- The other posts - right--}}
+    <div class="home-hero-cards">
+      {{#foreach posts from="4" to="5"}}
+        {{> post-card}}
+      {{/foreach}}
+    </div>
+  </div>
+{{/get}}

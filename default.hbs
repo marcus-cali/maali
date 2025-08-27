@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" data-color-scheme="{{@custom.color_scheme}}">
+  <head>
+    {{!-- Document Settings --}}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    {{!-- Page Meta --}}
+    <title>{{meta_title}}</title>
+
+    {{!-- Mobile Meta --}}
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {{!-- Theme color --}}
+    <meta name="theme-color" content="{{@site.accent_color}}">
+    <meta name="ghost-theme" content="Maali 1.7.0">
+
+    {{!-- Color scheme support --}}
+    {{!-- <meta name="color-scheme" content="dark light"> --}}
+
+    {{!-- Preloading --}}
+    <link rel="preload" href="{{asset 'dist/app.min.js'}}" as="script">
+    <link rel="preload" href="{{asset 'dist/app.min.css'}}" as="style">
+
+    {{!-- Fonts --}}
+    {{> fonts}}
+
+    {{!-- Main theme scripts --}}
+    <script async defer src="{{asset 'dist/app.min.js'}}"></script>
+
+    {{!-- Styles --}}
+    <link rel="stylesheet" type="text/css" href="{{asset 'dist/app.min.css'}}">
+
+    {{!-- Theme Settings --}}
+    {{> theme-settings}}
+    
+    {{!-- Syntax highlighting for posts and pages --}} 
+    {{!-- Can be activated using #syntax-highlight internal tag --}}
+    {{#post}}{{> syntax-highlight}}{{/post}}
+    {{#page}}{{> syntax-highlight}}{{/page}} 
+
+    {{!-- Ghost outputs important style and meta data with this tag --}}
+    {{ghost_head}}
+  </head>
+  <body class="{{body_class}} {{#is "page"}}{{#unless @page.show_title_and_feature_image}} page-no-title{{/unless}}{{/is}}" {{#is "post"}}{{#if @custom.enable_drop_caps}} data-drop-caps="true"{{/if}}{{/is}}{{#if @custom.show_post_card_excerpts}} data-excerpts="true"{{/if}}>
+    {{!-- Progress Bar for posts --}}
+    {{#is "post"}}<div class="progress-bar"></div>{{/is}}
+
+    {{^is "signup,signin"}}
+      {{!-- Header --}}
+      {{> header}}
+
+      {{!-- Menu --}}
+      {{> menu}}
+    {{/is}}
+
+    <main class="main flex-1">
+      {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
+      {{{body}}}
+    </main>
+    
+    {{^is "signup,signin"}}
+      {{!-- Subscribe CTA --}}
+      {{> subscribe-cta cta_class="reverse" input_label="footer-cta"}}
+
+      {{!-- Footer --}}
+      {{> footer}}
+    {{/is}}
+
+    {{!-- Notifications --}}
+    {{> notifications}}
+      
+    {{!-- Block for TOC --}}
+    {{{block "toc"}}}
+
+    {{!-- Block for scripts --}}
+    {{{block "scripts"}}}
+
+    {{!-- Ghost outputs important scripts and data with this tag --}}
+    {{ghost_foot}}
+  </body>
+</html>

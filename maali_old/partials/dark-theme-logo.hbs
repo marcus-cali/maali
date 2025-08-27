@@ -1,0 +1,18 @@
+<picture class="dark-theme-logo">
+  {{!-- Serve the WebP format if the browser supports it --}}
+  <source     
+    srcset="{{img_url @custom.dark_theme_logo size="xs" format="webp"}} 100w,{{img_url @custom.dark_theme_logo size="s" format="webp"}} 300w,{{img_url @custom.dark_theme_logo size="m" format="webp"}} 600w"
+    sizes="400px"
+    data-sizes="auto"
+    type="image/webp"
+  >
+  {{!-- Fallback image --}}
+  <img class="{{image_class}}"
+    srcset="{{img_url @custom.dark_theme_logo size="xs" format="webp"}} 100w,{{img_url @custom.dark_theme_logo size="s" format="webp"}} 300w,{{img_url @custom.dark_theme_logo size="m" format="webp"}} 600w"
+    sizes="400px"
+    data-sizes="auto"
+    data-src="{{img_url @custom.dark_theme_logo size="xs"}}"
+    src="{{img_url @custom.dark_theme_logo size="xxs"}}"
+    alt="{{@site.title}}"
+  >
+</picture>

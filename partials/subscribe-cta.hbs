@@ -1,0 +1,25 @@
+{{#if @site.members_enabled}}
+  {{#unless @site.members_invite_only}}
+    {{#unless member}}
+      {{#if @custom.cta_headline}}
+        <div class="subscribe-cta{{#if cta_class}} {{cta_class}}{{/if}}{{#is "home"}} is-home{{/is}}{{#is "post"}} is-post{{/is}}">
+          <div class="container wrapper">
+            <div class="subscribe-cta__content">
+              <span class="subscribe-cta__title mb-0" id="{{#if input_label}}{{input_label}}{{else}}subscribe-cta-label{{/if}}">
+                {{@custom.cta_headline}}
+              </span>
+              <p class="mb-0 mt-xs text-11">{{@custom.cta_description}}</p>
+            </div>
+            {{> subscribe-form
+              form_style="inline-joined"
+              form_class=""
+              input_class="w-100 bg-default"
+              button_class="btn--brand text-10"
+              input_label=input_label
+            }}
+          </div>
+        </div>
+      {{/if}}
+    {{/unless}}
+  {{/unless}}
+{{/if}}

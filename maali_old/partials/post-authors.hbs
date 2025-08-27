@@ -1,0 +1,10 @@
+{{#if access}}
+  <div class="post-authors mb-xl">
+    <span class="section-title xs">{{#match authors.length ">" 1}}{{t "Authors"}}{{else}}{{t "Author"}}{{/match}}</span>
+    <div class="grid gap-200">
+      {{#foreach authors}}
+        {{> author-card}}
+      {{/foreach}}
+    </div>
+  </div>
+{{/if}}

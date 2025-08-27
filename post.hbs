@@ -1,0 +1,123 @@
+{{!< default}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+  <div class="container wrapper">
+    {{!-- Post hero --}}
+    {{#match @custom.default_post_template "With narrow image"}}
+      {{> post-hero}}
+    {{else match @custom.default_post_template "With wide image"}}
+      {{> post-hero hero_class="wide"}}
+    {{else match @custom.default_post_template "With full-width image"}}
+      {{> post-hero hero_class="full-width"}}
+    {{else match @custom.default_post_template "With image on the side"}}
+      {{> post-hero hero_class="side"}}
+    {{else match @custom.default_post_template "With sidebar"}}
+      {{> post-hero hero_class="wide"}}
+    {{else match @custom.default_post_template "With ToC"}}
+      {{> post-hero}}
+    {{/match}}
+
+    {{#match @custom.default_post_template "With sidebar"}}
+      <div class="mb-lg wrapper-wide m-0-auto">
+        <div class="row">
+          <div class="col-xs-12 col-lg-8">
+            {{!-- Date and share --}}
+            {{#is "post"}}
+              {{> post-date-share}}
+            {{/is}}
+
+            {{!-- Post content --}}
+            <article class="{{post_class}} content post-access-{{visibility}} no-overflow">
+              {{content}}
+            </article>
+          </div>
+
+          {{!-- Sidebar --}}
+          <div class="col-xs-12 col-lg-4">
+            {{> sidebar}}
+          </div>
+        </div>
+      </div>
+    {{else}}
+      {{!-- Date and share --}}
+      {{#is "post"}}
+        {{> post-date-share}}
+      {{/is}}
+
+      {{!-- Post content --}}
+      <article class="{{post_class}} content post-access-{{visibility}}">
+        {{content}}
+      </article>
+    {{/match}}
+
+    {{#is "post"}}
+      {{!-- Tags --}}
+      {{> post-tags}}
+
+      {{!-- Authors --}}
+      {{> post-authors}}
+    {{/is}}
+  </div>
+
+  {{!-- Structured data: NewsArticle (no custom helpers, no absolute helper) --}}
+  {{#is "post"}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "{{url}}" },
+
+  "headline": "{{title}}",
+  "description": "{{#if custom_excerpt}}{{custom_excerpt}}{{else}}{{excerpt}}{{/if}}",
+  "url": "{{url}}",
+
+  "datePublished": "{{date published_at format="YYYY-MM-DDTHH:mm:ssZ"}}",
+  "dateModified": "{{date updated_at format="YYYY-MM-DDTHH:mm:ssZ"}}",
+
+  "author": {
+    "@type": "Person",
+    "name": "{{primary_author.name}}",
+    "url": "{{primary_author.url}}"{{#if primary_author.profile_image}},
+    "image": {
+      "@type": "ImageObject",
+      "url": "{{primary_author.profile_image}}"
+    }{{/if}}
+  },
+
+  "publisher": {
+    "@type": "NewsMediaOrganization",
+    "@id": "https://www.implicator.ai/#organization",
+    "name": "Implicator.ai",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.implicator.ai/content/images/logo.png",
+      "width": 512,
+      "height": 512
+    }
+  },
+
+  "image": [
+    {{#if feature_image}}"{{feature_image}}"{{else}}"https://www.implicator.ai/content/images/logo.png"{{/if}}
+  ]{{#if primary_tag}},
+  "articleSection": "{{primary_tag.name}}"{{/if}}{{#if tags}},
+  "keywords": [{{#foreach tags}}"{{name}}"{{#unless @last}}, {{/unless}}{{/foreach}}]{{/if}}
+}
+</script>
+  {{/is}}
+
+  {{!-- Comments --}}
+  {{#is "post"}}
+    {{> comments}}
+  {{/is}}
+{{/post}}
+
+{{!-- Table of Contents --}}
+{{#match @custom.default_post_template "With ToC"}}
+  {{> toc}}
+{{/match}}
+
+{{!-- Read next --}}
+{{#is "post"}}
+  {{> related}}
+{{/is}}

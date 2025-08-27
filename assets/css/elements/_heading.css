@@ -1,0 +1,50 @@
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
+  color: inherit;
+	word-break: break-word;
+
+  a {	color: inherit;	}
+}
+
+h1 {
+  font-size: clamp(1.6rem, 1.6rem + 1vw, 2.6rem);
+	font-weight: var(--font-weight-bold);
+	line-height: calc(var(--line-height-base) * 0.8);
+  margin: 0 0 0.5em;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 1.4rem + 1vw, 2.2rem);
+	font-weight: var(--font-weight-bold);
+	line-height: calc(var(--line-height-base) * 0.85);
+	margin: 0 0 0.6em;
+}
+
+h3 {
+  font-size: clamp(1.3rem, 1.3rem + 1vw, 1.8rem);
+	font-weight: var(--font-weight-bold);
+	line-height: calc(var(--line-height-base) * 0.9);
+	margin: 0 0 0.7em;
+}
+
+h4 {
+  font-size: clamp(1.2rem, 1.2rem + 1vw, 1.5rem);
+	font-weight: var(--font-weight-bold);
+	line-height: calc(var(--line-height-base) * 0.95);
+	margin: 0 0 0.8em;
+}
+
+h5 {
+  font-size: clamp(1.1rem, 1.1rem + 1vw, 1.25rem);
+	font-weight: var(--font-weight-semi-bold);
+	line-height: calc(var(--line-height-base) * 1);
+	margin: 0 0 0.9em;
+}
+
+h6 {
+  font-size: clamp(1rem, 1rem + 1vw, 1.1rem);
+	font-weight: var(--font-weight-semi-bold);
+	line-height: calc(var(--line-height-base) * 1);
+	margin: 0 0 1em;
+}

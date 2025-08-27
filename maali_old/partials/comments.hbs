@@ -1,0 +1,18 @@
+{{!-- Comments --}}
+{{#if comments}}
+  {{#if access}}
+    <div class="bg-acc">
+      <div class="container wrapper">
+        <div class="post-comments radius-double p-lg pb-0 flex-1 self-align-start" id="comments">
+          <div class="content-width">
+            {{comments 
+              title=(t 'Comments')
+              count=true
+              mode=auto
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+{{/if}}

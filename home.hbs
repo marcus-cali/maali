@@ -1,0 +1,147 @@
+{{!< default}}
+
+{{!-- Hero section --}}
+{{#match @custom.hero_layout "3 featured posts & latest news & editors picks"}}
+  {{> "hero/3-featured+latest+editors"}}
+{{else match @custom.hero_layout "3 featured posts & latest news"}}
+  {{> "hero/3-featured+latest"}}
+{{else match @custom.hero_layout "3 featured posts & latest news v2"}}
+  {{> "hero/3-featured+latest-v2"}}
+{{else match @custom.hero_layout "3 featured posts"}}
+  {{> "hero/3-featured"}}
+{{else match @custom.hero_layout "4 featured posts"}}
+  {{> "hero/4-featured"}}
+{{else match @custom.hero_layout "4 featured posts v2"}}
+  {{> "hero/4-featured-v2"}}
+{{else match @custom.hero_layout "5 featured posts"}}
+  {{> "hero/5-featured"}}
+{{else match @custom.hero_layout "1 featured post"}}
+  {{> "hero/1-featured"}}
+{{/match}}
+
+{{!-- Subscribe section --}}
+{{> subscribe-cta cta_class="site-width" input_label="hero-cta"}}
+
+{{!-- Topic section with articles (Posts by tag) --}}
+{{#if @custom.topic_section_tag_slugs}}
+  {{#get "tags" filter="slug:[{{@custom.topic_section_tag_slugs}}]" limit="30" include="count.posts" as |topics|}}
+    {{#foreach topics columns="3"}}
+      {{!-- Mixed tag sections  --}}
+      {{#match @custom.topic_section_layout "mixed"}}
+        <section class="topic-section {{slug}}">
+          <h2 class="section-title" {{#if accent_color}}style="--color-accent: {{accent_color}}"{{/if}}>{{name}}</h2>
+
+          {{!-- Every 3n+1 tag section (1,4,7...) --}}
+          {{#if @rowStart}}
+            {{#get "posts" filter="featured:false+tag:{{slug}}" include="tags,authors" limit="4"}}
+              <div class="grid post-feed gap-150" data-layout="1+3">
+                {{#foreach posts to="1"}}
+                  {{> post-card card_class="main-post" heading="h3"}}
+                {{/foreach}}
+                <div class="post-stack">
+                  {{#foreach posts from="2"}}
+                    {{> post-card card_class="horizontal" heading="h3"}}
+                  {{/foreach}}
+                </div>
+              </div>
+
+              {{#match posts.length ">" 3}}
+                <a class="btn btn--bordered" href="{{../url}}">{{t "More"}} {{../name}}</a>
+              {{/match}}
+            {{/get}}
+          {{/if}}
+
+          {{!-- Every 3n+2 tag section (2,5,8...) --}}
+          {{#unless @rowStart}}
+            {{#unless @rowEnd}}
+              {{#get "posts" filter="featured:false+tag:{{slug}}" include="tags,authors" limit="4"}}
+                <div class="grid post-feed gap-150" data-layout="4x1">
+                  {{#foreach posts}}
+                    {{> post-card heading="h3"}}
+                  {{/foreach}}
+                </div>
+
+                {{#match posts.length ">" 3}}
+                  <a class="btn btn--bordered" href="{{../url}}">{{t "More"}} {{../name}}</a>
+                {{/match}}
+              {{/get}}
+            {{/unless}}
+          {{/unless}}
+
+          {{!-- Every 3n+3 tags section (3,6,9...) --}}
+          {{#if @rowEnd}}
+            {{#get "posts" filter="featured:false+tag:{{slug}}" include="tags,authors" limit="4"}}
+              <div class="grid post-feed gap-150" data-layout="2x2">
+                {{#foreach posts}}
+                  {{> post-card card_class="horizontal" heading="h3"}}
+                {{/foreach}}
+              </div>
+
+              {{#match posts.length ">" 3}}
+                <a class="btn btn--bordered" href="{{../url}}">{{t "More"}} {{../name}}</a>
+              {{/match}}
+            {{/get}}
+          {{/if}}
+        </section>
+      {{else}}
+        {{!-- Fixed style for every section --}}
+        <section class="topic-section {{slug}}">
+          <h2 class="section-title">{{name}}</h2>
+
+          {{#get "posts" filter="featured:false+tag:{{slug}}" include="tags,authors" limit="4"}}
+            <div class="grid post-feed gap-150" data-layout="{{@custom.topic_section_layout}}">
+              {{#match @custom.topic_section_layout "4x1"}}
+                {{#foreach posts}}
+                  {{> post-card heading="h3"}}
+                {{/foreach}}
+              {{else match @custom.topic_section_layout "2x2"}}
+                {{#foreach posts}}
+                  {{> post-card card_class="horizontal" heading="h3"}}
+                {{/foreach}}
+              {{else match @custom.topic_section_layout "1+3"}}
+                {{#foreach posts to="1"}}
+                  {{> post-card card_class="main-post" heading="h3"}}
+                {{/foreach}}
+                <div class="post-stack">
+                  {{#foreach posts from="2"}}
+                    {{> post-card card_class="horizontal" heading="h3"}}
+                  {{/foreach}}
+                </div>
+              {{/match}}
+            </div>
+
+            {{#match posts.length ">" 3}}
+              <a class="btn btn--bordered" href="{{../url}}">{{t "More"}} {{../name}}</a>
+            {{/match}}
+          {{/get}}
+        </section>
+      {{/match}}
+    {{/foreach}}
+  {{/get}}
+{{/if}}
+
+{{!-- Featured writers --}}
+{{#if @custom.featured_author_slugs}}
+  {{#get "authors" filter="slug:[{{@custom.featured_author_slugs}}]" limit="30" include="count.posts"}}
+    {{#if authors}}
+      <section class="authors container wrapper mb-xl">
+        <h2 class="section-title">{{t "Our writers"}}</h2>
+        {{#foreach authors}}
+          {{#if count.posts}}
+            <div class="grid author">
+              {{> author-card}}
+              
+              {{#get "posts" filter="authors:{{slug}}" include="tags,authors" limit="3"}}
+                {{#foreach posts}}
+                  {{> post-card-simple}}
+                {{/foreach}}
+              {{/get}}
+            </div>
+          {{/if}}
+        {{/foreach}}
+
+        <a class="btn btn--bordered" href="/authors/">{{t "See all"}}</a>
+      </section>
+    {{/if}}
+  {{/get}}
+{{/if}}

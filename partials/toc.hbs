@@ -1,0 +1,60 @@
+{{!-- Toc UI --}}
+<div class="post-toc js-post-toc"> 
+  <button class="btn post-toc-toggle" aria-label="{{t "Table of contents"}}"
+    onclick="this.parentNode.classList.toggle('is-visible')">
+    {{> icon name="chevron-right"}}
+  </button>
+  <div class="post-toc__content js-toc">
+  </div>
+</div>
+
+{{!-- Toc Script --}}
+{{#contentFor "scripts"}}
+  <script>
+    document.addEventListener('readystatechange', function(event) {
+      if (document.readyState === "complete") {
+        // table of contents toggle
+        const postToc = document.querySelector('.js-post-toc');
+
+        // media query for TOC function
+        //const mqSmall = window.matchMedia('(max-width: 1200px)');
+        //const mqLarge = window.matchMedia('(min-width: 1280px)');
+
+        if (postToc && !isInViewport('.header-menu') && !isInViewport('.read-next')) 
+          postToc.classList.add('is-active');
+
+        window.addEventListener('scroll', (event) => {
+          if ( isInViewport('.header-menu') || isInViewport('.read-next') || isInViewport('.footer')) {
+            postToc.classList.remove('is-active', 'is-visible');
+          } else {
+            postToc.classList.add('is-active');
+          }
+        });
+
+        const headerStyle = document.querySelector('.js-header').getAttribute('data-style');
+        let headerOffset = headerStyle === 'sticky' ? 80 : 20;
+
+        if (postToc) {
+          tocbot.init({
+            // Where to render the table of contents.
+            tocSelector: '.js-toc',
+            // Where to grab the headings to build the table of contents.
+            contentSelector: '.content',
+            // Which headings to grab inside of the contentSelector element.
+            headingSelector: 'h2',
+            // Ignore some headings (like header card and toggle card)
+            ignoreSelector: '[class*="kg-"],[class*="content-cta"]',
+            // For headings inside relative or absolute positioned containers within content.
+            hasInnerContainers: false,
+            // smooth scroll
+            scrollSmooth: false,
+            // offset
+            headingsOffset: headerOffset,
+          });
+
+          document.querySelector('.js-toc .toc-list') ? postToc.classList.add('is-rendered') : null;
+        }
+      }
+    });
+  </script>
+{{/contentFor}}

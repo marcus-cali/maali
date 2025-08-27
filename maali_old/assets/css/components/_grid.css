@@ -1,0 +1,5 @@
+.grid { display: grid; }
+
+.grid.post-feed {
+  grid-template-columns: repeat(auto-fit,minmax(calc(16rem + 2vw),1fr));
+}

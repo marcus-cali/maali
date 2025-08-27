@@ -1,0 +1,62 @@
+/* Sections */
+.main {
+  flex: 1;
+  width: 100%;
+}
+
+/* General section style */
+.section {
+  margin-bottom: 1rem;
+
+  .grid { width: 100%; }
+
+  &-title {
+    --color-border-accent: var(--color-border);
+    display: block;
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-bold);
+    font-size: clamp(1rem, 1rem + 1vw, 1.4rem);
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+    color: var(--color-text-acc);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--color-border-accent);
+    text-transform: uppercase;
+
+    &.xxs { 
+      font-size: clamp(0.8rem, 0.8rem + 1vw, 1rem); 
+      margin-bottom: 1rem; 
+      padding-bottom: 0.25rem;
+    }
+    &.xs { font-size: clamp(0.9rem, 0.9rem + 1vw, 1.1rem); }
+    &.sm { font-size: clamp(1rem, 1rem + 1vw, 1.2rem); }
+  }
+}
+
+.err {
+  margin: 2em auto; 
+  position: relative;    
+  max-height: 30rem;
+
+  &__content {
+    position: absolute;
+    max-width: 32rem;
+    text-align: center;
+  }
+
+  svg {
+    max-width: 100%;
+    object-fit: cover;
+    height: 100%;
+  }
+
+  &__description { margin-bottom: 1.25em; }
+}
+
+.read-next .post-card__excerpt { display: none; }
+.author-template .post-card__excerpt, 
+.tag-template .post-card__excerpt, 
+.page-template .post-card__excerpt { 
+  display: none; 
+} 

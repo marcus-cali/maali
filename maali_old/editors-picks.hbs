@@ -1,0 +1,21 @@
+{{!< default}}
+
+{{#if posts}}
+  <div class="container wrapper mt-lg">
+    {{!-- Title --}}
+    <h1 class="section-title">
+      {{#page}}{{title}}{{else}}{{t "Editor's picks"}}{{/page}}
+      {{#is "paged"}}({{t "Page"}} {{pagination.page}}){{/is}}
+    </h1>
+
+    {{!-- Articles --}}
+    <div class="flex flex-col gap-150 mb-lg max-w-60">
+      {{#foreach posts}}
+        {{> post-card card_class="horizontal" heading="h2"}}
+      {{/foreach}}
+    </div>
+
+    {{!-- Pagination --}}
+    {{> pagination}}
+  </div>
+{{/if}}

@@ -1,0 +1,63 @@
+<div class="author-card author-{{slug}}{{#if class}} {{class}}{{/if}}{{#if profile_image}} has-image{{/if}}">
+
+  {{!-- Author profile image --}}
+  {{#if profile_image}}
+    {{#link href=url class="author-card__media flex flex-cc"}}
+      {{> image
+        image_type="author"
+        picture_class="author-card__img z-index-1"
+        image_class="lazyload"
+        image_url=profile_image
+        size_xs=true
+        size_s=true
+        sizes="120px"
+      }}
+    {{/link}}
+  {{/if}}
+
+  {{!-- Author hero content --}}
+  <div class="author-card__content flex-1 flex flex-col text-acc">
+    <div class="author-card__header">
+      <h3 class="author-card__name fw-700 mb-0">
+        {{#link href=url}}{{name}}{{/link}}
+      </h3>
+
+      <ul class="author-card__social {{#if twitter}} has-twitter{{/if}}{{#if facebook}} has-facebook{{/if}}{{#if website}} has-website{{/if}}">
+        {{!-- Twitter --}}
+        {{#if twitter}}
+          <li>
+            <a href="{{twitter_url}}" class="twitter"
+              title="Twitter" aria-label="Twitter"
+              target="_blank" rel="noopener noreferrer">
+              {{> icon name="twitter-x" size="sm"}}
+            </a>
+          </li>
+        {{/if}}
+        {{!-- Facebook --}}
+        {{#if facebook}}
+          <li>
+            <a href="{{facebook_url}}" class="facebook"
+              title="Facebook" aria-label="Facebook"
+              target="_blank" rel="noopener noreferrer">
+              {{> icon name="facebook" icon_class="filled" size="sm"}}
+            </a>
+          </li>
+        {{/if}}
+        {{!-- Author website --}}
+        {{#if website}}
+          <li>
+            <a href="{{website}}" class="link"
+              title="Website" aria-label="Website"
+              target="_blank" rel="noopener noreferrer">
+              {{> icon name="link" size="sm"}}
+            </a>
+          </li>
+        {{/if}}
+      </ul>
+    </div>
+    
+    {{#if bio}}<p class="author-card__bio text-acc opacity-080">{{bio}}</p>{{/if}}
+    
+    {{#link href=url class="author-card__view text-08 text-acc opacity-075 fw-600"}}{{t "View articles"}}{{/link}}
+  </div>
+</div>

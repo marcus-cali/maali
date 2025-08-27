@@ -1,0 +1,118 @@
+.post-toc {
+  position: fixed;
+  z-index: 50;
+  max-height: 60%;
+  top: 20%;
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+  width: 100%;
+  transform: translateX(-100%);
+  transition: all var(--transition-default);
+  font-weight: var(--font-weight-medium);
+  border: 1px solid var(--color-border);
+  
+  @media (--mq-xl) {
+    border: none;
+  }
+
+  &__content { 
+    background-color: var(--color-bg); 
+    padding: 1em;
+    padding-left: 0;
+    width: 100%;
+  }
+
+  &-toggle {
+    background-color: var(--color-border);
+    color: var(--color-text);
+    border: none;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    padding: 8px;
+    position: absolute;
+    top: -1px;
+    right: -36px;
+    border: 1px solid var(--color-border);
+    opacity: 0;
+    visibility: hidden;
+
+    @mixin attention {
+      background-color: var(--color-bg-reverse);
+      color: var(--color-text-reverse);
+      border-color: var(--color-bg-reverse);
+    }
+
+    @media (--mq-xl) {
+      display: none;
+    }
+  }
+
+  &.is-visible { transform: translateX(0); }
+
+  &.is-active { 
+    @media (--mq-xl) { transform: translateX(0); } 
+
+    .post-toc-toggle { 
+      opacity: 1;
+      visibility: visible;
+      
+      i { transform: rotate(180deg); }
+    }
+  }
+}
+
+.toc-list { 
+  padding: 0;
+  margin: 0;
+
+  &.is-collapsed { display: none; }
+
+  &-item {
+    padding: 8px;
+    padding-left: 32px;
+    position: relative;
+    transition: all var(--transition-default);
+
+    a { 
+      display: block; 
+      max-width: 240px; 
+    }
+
+    &:before {
+      content: "";
+      width: 16px;
+      height: 1px;
+      position: absolute;
+      left: 0;
+      top: 20px;
+      background-color: var(--color-text);
+      transition: all var(--transition-default);
+      opacity: 0.25;
+    }
+
+    &.is-active-li {
+      padding-left: 40px;
+      color: var(--color-brand);
+
+      li { color: var(--color-text); }
+
+      &:before { 
+        width: 32px; 
+        background-color: var(--color-brand);
+      }
+    }
+
+    .toc-list { list-style: none; }
+    .toc-list .toc-list-item, .toc-list .toc-list-item.is-active-li { padding-left: 16px; }
+    .toc-list .toc-list-item:before { display: none; }
+  }
+}
+
+.header[data-style="sticky"] ~ .main .content {
+  h2[id], h3[id], h4[id] {
+    scroll-margin-top: 80px;
+  }
+}

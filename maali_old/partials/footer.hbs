@@ -1,0 +1,77 @@
+{{!-- Site footer --}}
+<footer class="footer">
+  <div class="container wrapper">
+    <div class="row">
+      <div class="col-xs-12 col-md-4">
+        {{!-- Site title / logo --}}
+        <div class="footer__brand flex items-center">
+          {{#if @custom.dark_theme_logo}}
+            {{> dark-theme-logo
+              image_class="footer__logo mr lazyload"
+            }}
+          {{/if}}
+          {{#if @site.logo}}
+            {{> image
+              picture_class="default-logo"
+              image_type="site"
+              image_class="footer__logo mr lazyload"
+              image_url=@site.logo
+              size_s=true
+              size_m=true
+              sizes="200px"
+            }}
+          {{else}}
+            <span class="footer__title">{{@site.title}}</span>
+          {{/if}}
+        </div>
+
+        {{!-- Site description --}}
+        <div class="footer__description" id="footer-input-label">
+          {{@site.description}}
+        </div>
+
+        {{!-- Socials --}}
+        <div class="social-links">
+          {{> social-links}}
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-8">
+        {{!-- Main navigation --}}
+        <span class="fw-700 mb-xs display-block text-12">{{t "Navigation"}}</span>
+        {{navigation}}
+
+        {{!-- Secondary navigation --}}
+        {{#if @site.secondary_navigation}}
+          <span class="footer__subtitle fw-700 mb-xs display-block text-12">{{t "More"}}</span>
+          {{navigation type="secondary"}}
+        {{/if}}
+
+        {{#if @custom.topic_section_tag_slugs}}
+          <span class="footer__subtitle fw-700 mb-xs display-block text-12">{{t "Topics"}}</span>
+          {{#get "tags" filter="slug:[{{@custom.topic_section_tag_slugs}}]" limit="all"}}
+            <ul class="nav">
+              {{#foreach tags}}
+                <li><a href="{{url}}">{{name}}</a></li>
+              {{/foreach}}
+            </ul>
+          {{/get}}
+        {{/if}}
+
+      </div>
+    </div>
+
+    {{!-- Footer copy & theme --}}
+    <div class="footer__bottom">
+      {{!-- Footer Copy --}}
+      <div class="footer__copy">
+        <span>&copy;{{date format="YYYY"}}&nbsp;{{#link href=@site.url}}{{@site.title}}{{/link}}.</span>
+        <span>{{t "Published with"}}&nbsp;{{#link href="https://ghost.org"}}Ghost{{/link}}&nbsp;&&nbsp;{{#link href="https://brightthemes.com/themes/maali/"}}Maali{{/link}}.</span>
+      </div>
+
+      {{!-- Color scheme dropdown --}}
+      {{> color-scheme-dropdown}}
+    </div>
+
+  </div>
+</footer>

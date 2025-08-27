@@ -1,0 +1,64 @@
+.subscribe-cta {
+  background-color: var(--color-bg-acc);
+  padding: 3em 0;
+
+  @media (--mq-lg) { padding: 4em 0; }
+
+  &.reverse {
+    background-color: var(--color-bg-reverse);
+    color: var(--color-bg);
+  }
+  
+  &.site-width.is-home { 
+    margin-bottom: 3em;
+    margin-top: 1em;
+    background-color: #7a7a7a; /* Brighter middle grey background */
+    color: #ffffff; /* White text for contrast */
+    
+    .subscribe-cta__title {
+      color: #ffffff;
+    }
+    
+    p {
+      color: rgba(255, 255, 255, 0.9);
+      opacity: 1;
+    }
+
+    @media (--mq-lg) {
+      margin-top: 0;
+      margin-bottom: 4em;
+    }
+  }
+
+  form { 
+    max-width: 30rem; 
+    @media (--mq-lg) {
+      border: 1px solid var(--color-border);
+    }
+  }
+
+  .container { 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap);
+  }
+
+  &__content { max-width: 36rem; }
+
+  &__title {
+    font-family: var(--font-headings);
+    font-size: clamp(1.2rem, 1.2rem + 1vw, 1.8rem);
+    font-weight: var(--font-weight-extra-bold);
+  }
+
+  p { 
+    line-height: 1.5; 
+    opacity: 0.75;
+  }
+}
+
+.subscribe-cta.reverse input {
+  color: var(--color-text);
+}

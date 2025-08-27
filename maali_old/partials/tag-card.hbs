@@ -1,0 +1,28 @@
+<a href="{{url}}" class="tag-card"{{#if accent_color}} style="--color-accent: {{accent_color}}"{{/if}}>
+  {{!-- Tag image --}}
+  {{#if feature_image}}
+    <figure class="tag-card__media">
+      {{> image
+        image_type="tag"
+        image_class="lazyload tag-card__img"
+        image_url=feature_image
+        size_xs=true
+        size_s=true
+        size_m=true
+        sizes="60px"
+      }}
+    </figure>
+  {{/if}}
+
+  {{!-- Tag content --}}
+  <div class="tag-card__content">
+    {{!-- Tag name --}}
+    <h2 class="tag-card__name">{{name}}</h2>
+    {{!-- Description & count --}}
+    {{#if description}}<p class="tag-card__description">{{description}}</p>{{/if}}
+    
+    <span class="tag-card__count items-center text-09">
+      {{#plural count.posts empty=(t 'No articles') singular=(t '1 article') plural=(t '% articles')}}{{/plural}}
+    </span>
+  </div>
+</a>

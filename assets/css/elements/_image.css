@@ -1,0 +1,8 @@
+/* Image */
+img {
+  max-width: 100%;
+  margin: 0;
+  height: auto;
+}
+
+picture { border-radius: inherit; }

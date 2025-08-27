@@ -1,0 +1,30 @@
+{{#get "posts" filter="featured:false" include="authors,tags" limit="4" as |latest|}}
+  <div class="container wrapper home-hero" data-layout="4-featured-v2" data-lines="true">
+    {{!-- Main post --}}
+    {{#get "posts" filter="featured:true" include="authors,tags" limit="1" as |featured|}}
+      {{#if featured}}
+        {{#foreach featured to="1"}}
+          {{> post-card card_class="full-width" heading="h1"}}
+        {{/foreach}}
+
+        {{!-- The other posts --}}
+        <div class="home-hero-cards">
+          {{#foreach latest to="3"}}
+            {{> post-card}}
+          {{/foreach}}
+        </div>
+      {{else}}
+        {{#foreach latest to="1"}}
+          {{> post-card card_class="full-width" heading="h1"}}
+        {{/foreach}}
+
+        {{!-- The other posts --}}
+        <div class="home-hero-cards">
+          {{#foreach latest from="2" to="4"}}
+            {{> post-card}}
+          {{/foreach}}
+        </div>
+      {{/if}}
+    {{/get}}
+  </div>
+{{/get}}

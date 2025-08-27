@@ -1,0 +1,45 @@
+<article class="post-card post-card-simple no-image{{#if featured}} is-featured{{/if}}{{#if class}} {{class}}{{/if}} js-post-card">
+  {{!-- Feature Image --}}
+  {{#if show_image}}
+    {{#if feature_image}}
+      {{#link href=url class="post-card-simple__media"}}
+        <figure>
+          {{> image
+            image_type="post"
+            image_class="lazyload"
+            image_url=feature_image
+            size_xxs=true
+            size_xs=true
+            sizes="80px"
+          }}
+        </figure>
+      {{/link}}
+    {{/if}}
+  {{/if}}
+  
+  <div class="post-card-simple__content flex-1">
+    {{!-- Tag --}}
+    <div class="flex post-card-tags">
+      {{#foreach tags limit=@custom.post_card_tags_limit}}
+        <a class="post-tag tag-{{slug}}" href="{{url}}" aria-label="{{name}}"
+          {{#if accent_color}} style="--color-accent: {{accent_color}}"{{/if}}
+        >{{name}}</a>
+        {{#unless @last}}
+          <span class="tag-separator">/</span>
+        {{/unless}}
+      {{/foreach}}
+    </div>
+
+    {{!-- Title --}}
+    <h3 class="post-card-simple__title">
+      {{#link href=url aria-label=(title)}}{{title}}{{/link}}
+    </h3>
+
+    {{!-- {{#if custom_excerpt}}
+      <p class="post-card-simple__excerpt">{{custom_excerpt}}</p>
+    {{/if}} --}}
+
+    {{!-- Post author & date --}}
+    {{> post-author-date single_author=true hide_author=hide_author}}
+  </div>
+</article>

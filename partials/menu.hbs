@@ -1,0 +1,55 @@
+{{!-- Blog menu --}}
+<div class="menu js-menu">
+  <div class="container wrapper">
+    {{!-- Navigation --}}
+    <div class="menu__content">
+      <nav class="menu__navigation">
+        {{navigation}}
+
+        {{#if @site.secondary_navigation}}
+          {{navigation type="secondary"}}
+        {{/if}}
+      </nav>
+
+      <div class="menu__posts">
+        <span class="menu__posts-title">{{t "Latest news"}}</span>
+        {{#get "posts" include="authors,tags" limit="3"}}
+          {{#foreach posts}}
+            {{> post-card card_class="horizontal" hide_image=true}}
+          {{/foreach}}
+        {{/get}}
+      </div>
+    </div>
+  </div>
+
+  <div class="w-100 mt border-top">
+    <div class="menu__actions">
+      {{!-- Sign up Button --}}
+      {{#if @member}}
+        <a href="javascript:" data-members-signout class="btn signin-link radius">
+          {{t "Log out"}}
+        </a>
+        <a href="/account/"{{#if @custom.use_portal_links}} data-portal="signup"{{/if}} class="btn signup-link btn--brand radius">
+          {{t "Account"}}
+        </a>
+      {{else}}
+        {{#if @site.members_enabled}}
+          <a href="/signin/"{{#if @custom.use_portal_links}} data-portal="signin"{{/if}} class="btn signin-link radius">
+            {{t "Log in"}}
+          </a>
+          <a href="/signup/"{{#if @custom.use_portal_links}} data-portal="signup"{{/if}} class="btn signup-link btn--brand radius">
+            {{t "Subscribe"}}
+          </a>
+        {{/if}}
+      {{/if}}
+
+      <span class="flex-1"></span>
+
+      {{!-- Socials --}}
+      <div class="social-links items-center mb">
+        <span class="fw-600 mr-sm">{{t "Follow"}}</span>
+        {{> social-links}}
+      </div>
+    </div>
+  </div>
+</div>

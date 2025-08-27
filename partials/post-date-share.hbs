@@ -1,0 +1,31 @@
+<div class="post-date-share">
+  <time datetime="{{date format="YYYY-MM-DD"}}">
+    <span>{{date format="MMMM DD YYYY"}}</span>
+    <span class="post-date__time">{{date format="h:mm A"}}</span>
+  </time>
+
+  {{#if reading_time}}
+    <span class="post-readtime">{{reading_time minute=(t '1 min read') minutes=(t '% min read')}}</span>
+  {{/if}}
+  
+  {{!-- {{#if comments}}
+    <a class="post-comment-count" href="#comments">
+      {{>icon name="comment" size="sm"}}
+      {{comment_count
+        empty="0"
+        singular=""
+        plural=""
+        class=""
+      }}
+    </a>
+  {{/if}} --}}
+
+  <span class="spacing"></span>
+
+  <button class="share-toggle" onclick="this.classList.toggle('is-active')">
+    <span>{{t "Share"}}</span>
+    {{> icon name="chevron-down"}}
+  </button>
+
+  {{> social-share}}
+</div>

@@ -1,0 +1,16 @@
+{{!-- Related Posts --}}
+{{#get "posts" include="tags,authors,tiers" limit="4" filter="tags:[{{post.tags}}]+id:-{{post.id}}" as |related|}}
+  {{#if related}}
+    <section class="read-next pt-xl pb-lg">
+      <div class="container wrapper">
+        <h2 class="section-title">{{t "Read next"}}</h2>
+
+        <div class="grid post-feed gap-150 related-posts mb-lg" data-feed-layout="grid">
+          {{#foreach posts}}
+            {{> post-card heading="h3"}}
+          {{/foreach}}
+        </div>
+      </div>
+    </section>
+  {{/if}}
+{{/get}}
