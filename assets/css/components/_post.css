@@ -6,6 +6,22 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  
+  &--stacked {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  &__author-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  &__date {
+    opacity: 0.65;
+  }
 
   &__avatars {
     list-style: none;
@@ -48,6 +64,11 @@
   }
 
   span, time { opacity: 0.65; }
+  
+  &__authors { 
+    opacity: 1;
+    font-size: 0.9rem;
+  }
 
   &__authors + time:before {
     content: "•";

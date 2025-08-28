@@ -1,57 +1,57 @@
-<div class="post-info">
+<div class="post-info post-info--stacked">
   {{#unless hide_author}}
-    <ul class="post-info__avatars">
+    <div class="post-info__author-row">
+      <ul class="post-info__avatars">
+        {{#if single_author}}
+          {{#foreach authors limit="1"}}
+            <li class="author-avatar {{#if profile_image}}has-image{{else}}has-icon{{/if}}">
+              <a href="{{url}}" title="{{name}}" aria-label="{{name}}">
+                {{#if profile_image}}
+                  {{> image
+                    image_type="author"
+                    image_class="lazyload"
+                    image_url=profile_image
+                    size_xxs=true
+                    size_xs=true
+                    sizes="60px"
+                  }}
+                {{else}}
+                  {{>icon name="user"}}
+                {{/if}}
+              </a>
+            </li>
+          {{/foreach}}
+        {{else}}
+          {{#foreach authors}}
+            <li class="author-avatar {{#if profile_image}}has-image{{else}}has-icon{{/if}}">
+              <a href="{{url}}" title="{{name}}" aria-label="{{name}}">
+                {{#if profile_image}}
+                  {{> image
+                    image_type="author"
+                    image_class="lazyload"
+                    image_url=profile_image
+                    size_xxs=true
+                    size_xs=true
+                    sizes="60px"
+                  }}
+                {{else}}
+                  {{>icon name="user"}}
+                {{/if}}
+              </a>
+            </li>
+          {{/foreach}}
+        {{/if}}
+      </ul>
+      
       {{#if single_author}}
-        {{#foreach authors limit="1"}}
-          <li class="author-avatar {{#if profile_image}}has-image{{else}}has-icon{{/if}}">
-            <a href="{{url}}" title="{{name}}" aria-label="{{name}}">
-              {{#if profile_image}}
-                {{> image
-                  image_type="author"
-                  image_class="lazyload"
-                  image_url=profile_image
-                  size_xxs=true
-                  size_xs=true
-                  sizes="60px"
-                }}
-              {{else}}
-                {{>icon name="user"}}
-              {{/if}}
-            </a>
-          </li>
-        {{/foreach}}
+        <span class="post-info__authors">{{authors limit="1" separator=", "}}</span>
       {{else}}
-        {{#foreach authors}}
-          <li class="author-avatar {{#if profile_image}}has-image{{else}}has-icon{{/if}}">
-            <a href="{{url}}" title="{{name}}" aria-label="{{name}}">
-              {{#if profile_image}}
-                {{> image
-                  image_type="author"
-                  image_class="lazyload"
-                  image_url=profile_image
-                  size_xxs=true
-                  size_xs=true
-                  sizes="60px"
-                }}
-              {{else}}
-                {{>icon name="user"}}
-              {{/if}}
-            </a>
-          </li>
-        {{/foreach}}
+        <span class="post-info__authors">{{authors separator=", "}}</span>
       {{/if}}
-    </ul>
+    </div>
   {{/unless}}
   
-  {{#unless hide_author}}
-    {{#if single_author}}
-      <span class="post-info__authors">{{authors limit="1" separator=", "}}</span>
-    {{else}}
-      <span class="post-info__authors">{{authors separator=", "}}</span>
-    {{/if}}
-  {{/unless}}
-  
-  <time datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time> 
+  <time class="post-info__date" datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time> 
 
   {{!-- Comment count --}}
   {{#if comments}}
